@@ -13,7 +13,7 @@ public class User {
     private String email;
     
 
-    @GraphQLQuery(name = "username")
+    @GraphQLQuery(name = "userid")
     public String getUserid() {
         return userid;
     }

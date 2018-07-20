@@ -1,11 +1,15 @@
 package org.gjeanmart.graphql.graphqlsqprtest.graphql;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
 import org.gjeanmart.graphql.graphqlsqprtest.domain.Article;
 import org.gjeanmart.graphql.graphqlsqprtest.domain.Comment;
+import org.gjeanmart.graphql.graphqlsqprtest.domain.Resource;
+import org.gjeanmart.graphql.graphqlsqprtest.domain.Resource1;
+import org.gjeanmart.graphql.graphqlsqprtest.domain.Resource2;
 import org.gjeanmart.graphql.graphqlsqprtest.domain.User;
 import org.springframework.stereotype.Component;
 
@@ -48,5 +52,26 @@ public class GraphQLQueryService {
         
         return comments;
     }
+    
+    @GraphQLQuery(name = "resource")
+    public Resource getResource(@GraphQLArgument(name = "id") String id)  {
+        log.info("resource(id: {})", id);
+        
+        if(id.equals("1")) {
+            return new Resource1(id, "resource1", "hello", "world");
+        } else {
+            return new Resource2(id, "resource1", "hello2", "worl2d");
+            
+        }
+        
+    }
+    
+    @GraphQLQuery(name = "resources")
+    public List<Resource> getResources()  {
+        return Arrays.asList(new Resource1("1", "resource1", "hello", "world"), new Resource2("2", "resource1", "hello2", "worl2d"));        
+    }
+    
+    
+    
     
 }
