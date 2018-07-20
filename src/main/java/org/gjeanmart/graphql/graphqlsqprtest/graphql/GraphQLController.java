@@ -54,7 +54,7 @@ public class GraphQLController {
 
             @Override
             public Collection<AnnotatedType> getInterfaces(AnnotatedType type) {
-                Class clazz = ClassUtils.getRawType(type.getType());
+                Class<?> clazz = ClassUtils.getRawType(type.getType());
                 Set<AnnotatedType> interfaces = new HashSet<>();
                 do {
                     AnnotatedType currentType = GenericTypeReflector.getExactSuperType(type, clazz);

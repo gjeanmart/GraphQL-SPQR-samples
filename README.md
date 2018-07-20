@@ -32,7 +32,7 @@ $ java -jar target/graphql-sqpr-test-0.0.1-SNAPSHOT-exec.jar
 ```
 
 
-## Query
+## Query (Context)
 
 ### Request
 
@@ -103,3 +103,48 @@ $ java -jar target/graphql-sqpr-test-0.0.1-SNAPSHOT-exec.jar
     "extensions": null
 }
 ```
+
+
+
+
+## Query (interface / inheritance)
+
+### Request
+
+```
+
+{
+  "query":"query resources { resources { type id ... on Resource1 {name fieldA fieldB } ... on Resource2 {name field2 field1 } } }",
+  "variables": {},
+  "operationName": "resources"
+}
+```
+
+### Response
+
+```
+{
+    "data": {
+        "resources": [
+            {
+                "type": "TYPE1",
+                "id": "1",
+                "name": "resource1",
+                "fieldA": "hello",
+                "fieldB": "world"
+            },
+            {
+                "type": "TYPE2",
+                "id": "2",
+                "name": "resource1",
+                "field2": "worl2d",
+                "field1": "hello2"
+            }
+        ]
+    },
+    "errors": [],
+    "dataPresent": true,
+    "extensions": null
+}
+```
+
